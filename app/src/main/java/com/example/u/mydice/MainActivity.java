@@ -1,5 +1,6 @@
 package com.example.u.mydice;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         btnNext = (Button) findViewById(R.id.btnNext);
     }
     private void ChangeView(int myRandom) {
+        int intSound = R.raw.effect_btn_shut;
         int[] intSource = new int[7];
         intSource[0] = 0;
         intSource[1] = R.drawable.dice1;
@@ -89,30 +91,46 @@ public class MainActivity extends AppCompatActivity {
 
         ImgDice.setImageResource(intSource[myRandom]);
 
+
+        MediaPlayer mediaPlayer = MediaPlayer.create(getBaseContext(), intSound);
+        mediaPlayer.start();
+
     }
 
     private  void ShowView(int intdice) {
         Log.d("test", "ค่าที่ได้รับ = " + intdice);
+        int intSound = R.raw.phonton1;
         switch (intdice) {
             case 1:
                 ImgDice.setImageResource(R.drawable.dice1);
+                intSound = R.raw.phonton1;
                 break;
             case 2:
                 ImgDice.setImageResource(R.drawable.dice2);
+                intSound = R.raw.phonton1;
                 break;
             case 3:
                 ImgDice.setImageResource(R.drawable.dice3);
+                intSound = R.raw.phonton1;
                 break;
             case 4:
                 ImgDice.setImageResource(R.drawable.dice4);
+                intSound = R.raw.phonton1;
                 break;
             case 5:
                 ImgDice.setImageResource(R.drawable.dice5);
+                intSound = R.raw.phonton1;
                 break;
             case 6:
                 ImgDice.setImageResource(R.drawable.dice6);
+                intSound = R.raw.phonton1;
                 break;
+
         }
+
+        MediaPlayer mediaPlayer = MediaPlayer.create(getBaseContext(), intSound);
+        mediaPlayer.start();
+
     }
 
     private void myRandomPicture(int intUser) {
