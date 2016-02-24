@@ -2,15 +2,19 @@ package com.example.u.mydice;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageView ImgDice;
     private Button btnBlack, btnRandom, btnNext;
+    private int intdice = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,11 @@ public class MainActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                intdice += 1;
+                if (intdice ==7) {
+                    intdice = 1;
+                }
+                ShowView(intdice);
             }
         });
 
@@ -40,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            myRandomPicture(intdice);
             }
         });
 
@@ -51,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
         btnBlack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                intdice -= 1;
+                if (intdice ==0) {
+                    intdice = 6;
 
+                }
+                ShowView(intdice);
             }
         });
 
@@ -64,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         btnRandom = (Button) findViewById(R.id.btnRandom);
         btnNext = (Button) findViewById(R.id.btnNext);
     }
-    private void ChangeOver(int myRandom) {
+    private void ChangeView(int myRandom) {
         int[] intSource = new int[7];
         intSource[0] = 0;
         intSource[1] = R.drawable.dice1;
@@ -76,6 +89,39 @@ public class MainActivity extends AppCompatActivity {
 
         ImgDice.setImageResource(intSource[myRandom]);
 
+    }
+
+    private  void ShowView(int intdice) {
+        Log.d("test", "ค่าที่ได้รับ = " + intdice);
+        switch (intdice) {
+            case 1:
+                ImgDice.setImageResource(R.drawable.dice1);
+                break;
+            case 2:
+                ImgDice.setImageResource(R.drawable.dice2);
+                break;
+            case 3:
+                ImgDice.setImageResource(R.drawable.dice3);
+                break;
+            case 4:
+                ImgDice.setImageResource(R.drawable.dice4);
+                break;
+            case 5:
+                ImgDice.setImageResource(R.drawable.dice5);
+                break;
+            case 6:
+                ImgDice.setImageResource(R.drawable.dice6);
+                break;
+        }
+    }
+
+    private void myRandomPicture(int intUser) {
+        int myRandom = 0;
+        Random objRandom = new Random();
+        myRandom = objRandom.nextInt(6) + 1;
+        Log.d("Ran", "nmyRandom ==>" + myRandom);
+
+        ChangeView(myRandom);
     }
 
 
